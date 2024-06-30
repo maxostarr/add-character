@@ -1,6 +1,7 @@
+import { createJournalEntry } from "./create-entry.js"
 import { DOCUMENT_NAME, ID, TEMPLATES } from "./model/constants.js"
 
-class AddCharacterApplication extends Application {
+class AddCharacterApplication extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [ID],
@@ -12,6 +13,21 @@ class AddCharacterApplication extends Application {
       popOut: true,
       title: DOCUMENT_NAME,
     })
+  }
+
+  async _updateObject(event, formData) {
+    const character = {
+      name: formData.name,
+      race: formData.race,
+      genderExpression: formData.genderExpression,
+      firstMet: formData.firstMet,
+      generatedTraits: formData.generatedTraits,
+      physicalDescription:
+        formData.physicalDescription || "~PHYSICAL DESCRIPTION~",
+      notes: formData.notes || "-",
+    }
+
+    createJournalEntry(character)
   }
 
   _getHeaderButtons() {

@@ -1,3 +1,15 @@
+/**
+ * Builds the content for a journal entry based on the provided data.
+ *
+ * @param {Object} data - The data used to build the journal entry content.
+ * @param {string} data.race - The race of the character.
+ * @param {string} data.genderExpression - The gender expression of the character.
+ * @param {string} data.firstMet - The first meeting description of the character.
+ * @param {string} data.generatedTraits - The generated traits of the character.
+ * @param {string} data.physicalDescription - The physical description of the character.
+ * @param {string} data.notes - The notes about the character.
+ * @returns {string} The HTML content for the journal entry.
+ */
 function buildJournalContent(data) {
   const {
     race,
@@ -224,18 +236,37 @@ function buildJournalContent(data) {
   "
 >
   <span style="font-family: Signika, sans-serif"
-    ><em style="box-sizing: border-box; user-select: text">Notes:</em>${notes}</span
+    ><em style="box-sizing: border-box; user-select: text">Notes: </em>${notes}</span
   >
 </p>
 `
 }
 
-export function createJournalEntry(data) {
+/**
+ * Creates a new journal entry with the provided data.
+ * @param {Object} data - The data for the journal entry.
+ * @param {string} data.name - The name of the journal entry.
+ * @param {string} data.race - The race of the character.
+ * @param {string} data.genderExpression - The gender expression of the character.
+ * @param {string} data.firstMet - The first meeting description of the character.
+ * @param {string} data.generatedTraits - The generated traits of the character.
+ * @param {string} data.physicalDescription - The physical description of the character.
+ * @param {string} data.notes - The notes about the character.
+ * @returns {Promise<void>} A promise that resolves when the journal entry is created.
+ */
+export async function createJournalEntry(data) {
   const { name } = data
   const content = buildJournalContent(data)
-  JournalEntry.create({
+  await JournalEntry.create({
     name,
-    content,
+    pages: [
+      {
+        name: "Bio",
+        text: {
+          content,
+        },
+      },
+    ],
     folder: game.folders.getName("Characters"),
     ownership: {
       default: 3,
