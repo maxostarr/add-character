@@ -53,7 +53,7 @@ function buildJournalContent(data) {
 >
   <span style="font-family: Signika, sans-serif"
     ><strong style="box-sizing: border-box; user-select: text"
-      >Gender Expression:</strong
+      >Gender Expression: </strong
     >${genderExpression}</span
   >
 </p>
@@ -85,7 +85,7 @@ function buildJournalContent(data) {
 >
   <span style="font-family: Signika, sans-serif"
     ><strong style="box-sizing: border-box; user-select: text"
-      >First Met:</strong
+      >First Met: </strong
     >${firstMet}</span
   >
 </p>
@@ -117,7 +117,7 @@ function buildJournalContent(data) {
 >
   <span style="font-family: Signika, sans-serif"
     ><strong style="box-sizing: border-box; user-select: text"
-      >Generated Traits:</strong
+      >Generated Traits: </strong
     >${generatedTraits}</span
   >
 </p>
